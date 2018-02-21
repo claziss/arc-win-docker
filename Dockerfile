@@ -10,10 +10,10 @@ RUN buildDeps='texinfo byacc flex libncurses5-dev zlib1g-dev libexpat1-dev wget 
     && dir="$(mktemp -d)" \
     && cd /usr/src/arc/toolchain \
     && mkdir /usr/src/arc/INSTALL_WIN \
-    && ./build-all.sh --no-uclibc --no-multilib --no-sim --no-auto-checkout \
-       --no-auto-pull --cpu quarkse_em --host i686-w64-mingw32 --no-system-expat \
+    && ./build-all.sh --no-uclibc --no-multilib --no-auto-checkout \
+       --no-auto-pull --cpu em --host i686-w64-mingw32 --no-system-expat \
        --target-cflags \"-mno-sdata\" --jobs "$(nproc)" --no-pdf \
        --build-dir "$dir" --install-dir /usr/src/arc/INSTALL_WIN \
+        --no-optsize-newlib  --no-optsize-libstdc++ \
     && rm -rf "$dir" \
     && apt-get purge -y --auto-remove $buildDeps
-
